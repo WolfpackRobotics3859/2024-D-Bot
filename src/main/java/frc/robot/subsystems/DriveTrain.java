@@ -23,8 +23,9 @@ public class DriveTrain extends SubsystemBase {
     motorLeft2.configFactoryDefault();
     motorRight1.configFactoryDefault();
     motorRight2.configFactoryDefault();
-    motorLeft2.setInverted(true);
-    motorLeft1.setInverted(true);
+    motorLeft2.setInverted(false);
+    motorLeft1.setInverted(false);
+    motorRight1.setInverted(true);
   }
 
   @Override
