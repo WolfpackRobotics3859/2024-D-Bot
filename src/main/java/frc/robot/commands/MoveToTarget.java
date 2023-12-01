@@ -4,13 +4,8 @@
 
 package frc.robot.commands;
 
-import org.photonvision.PhotonUtils;
-
-import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
 
 public class MoveToTarget extends CommandBase {
@@ -28,7 +23,39 @@ public class MoveToTarget extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    final double STEER_K = 0.03;
+    final double DRIVE_K = 0.26;
+    final double DESIRED_TARGET_AREA = 13.0;
+    final double MAX_SPEED = 0.4;  
+
+    double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
+    double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
+    double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
+
+    if (tv < 1){
+      driveTrain.setLeftMotors(0);
+      driveTrain.setRightMotors(0);
+      return;
+    }
+
+    double turn = tx * STEER_K;
+    double drive = (DESIRED_TARGET_AREA - ta) * DRIVE_K;
+
+    if (drive > MAX_SPEED){
+      drive = MAX_SPEED;
+    }
+
+    if (turn > MAX_SPEED){
+      turn = MAX_SPEED;
+    }
+
+    double left = drive + turn;
+    double right = drive - turn;
+
+    driveTrain.setLeftMotors(left);
+    driveTrain.setRightMotors(right);
+  }
 
   @Override
   public void end(boolean interrupted) {
