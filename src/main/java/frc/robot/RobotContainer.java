@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import org.photonvision.PhotonCamera;
-
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
@@ -22,7 +20,6 @@ public class RobotContainer {
   private final XboxController driverController = new XboxController(Constants.CONTROLLERS.DRIVER_CONTROLLER);
 
   //cameras
-  public static PhotonCamera camera = new PhotonCamera("photonvision");
 
   public RobotContainer() {
 

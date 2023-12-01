@@ -28,28 +28,7 @@ public class MoveToTarget extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    var result = RobotContainer.camera.getLatestResult();
-
-    if(result.hasTargets()){
-      result.getBestTarget();
-      
-      double range = PhotonUtils.calculateDistanceToTargetMeters(
-        Constants.CAMERA.CAMERA_HEIGHT_METERS,
-        Constants.CAMERA.TARGET_HEIGHT_METERS,
-        Constants.CAMERA.CAMERA_PITCH_RADIANS,
-        Units.degreesToRadians(result.getBestTarget().getPitch())
-      );
-      
-      SmartDashboard.putNumber("Range to Target", range);
-      SmartDashboard.putNumber("Target ID", result.getBestTarget().getFiducialId());
-
-      if (range > 1.5){
-        driveTrain.setRightMotors(0.5);
-        driveTrain.setLeftMotors(0.5);
-      }
-    } 
-  }
+  public void execute() {}
 
   @Override
   public void end(boolean interrupted) {
