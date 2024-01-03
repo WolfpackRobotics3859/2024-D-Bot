@@ -7,7 +7,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
-import frc.robot.commands.DriveFwd;
 import frc.robot.commands.MoveToTarget;
 import frc.robot.subsystems.DriveTrain;
 
@@ -34,9 +33,6 @@ public class RobotContainer {
     // Move to Target
     new JoystickButton(driverController, 1).whileTrue(new MoveToTarget(driveTrain));
 
-    // DriveFWD
-    new JoystickButton(driverController, 2).whileTrue(new DriveFwd(driveTrain));
-    
   }
 
 }
